@@ -1,8 +1,9 @@
 describe("empty spec", () => {
   beforeEach(() => {
+    cy.intercept("GET", "http://localhost:3001/api/v1/urls", {fixture: "testUrl2"})
     cy.visit("http://localhost:3000/");
   });
-  it("should visits the page, and show the page title and the existing shortened URLs", () => {
+  it.only("should visits the page, and show the page title and the existing shortened URLs", () => {
     cy.get(".card-container").should("exist");
     cy.get(".title").should("exist").contains("URL Shortener");
     cy.get(".card-container > :nth-child(1)").should("exist");
@@ -33,7 +34,7 @@ describe("empty spec", () => {
       );
   });
 
-  it.only("should be able to fill out and submits the form, and a new shortened URL is rendered", () => {
+  it("should be able to fill out and submits the form, and a new shortened URL is rendered", () => {
     cy.intercept("GET", "http://localhost:3001/api/v1/urls", {fixture: "testUrl"})
     cy.visit("http://localhost:3000/")
     cy.get('h3').should("exist").contains("Test Here")
