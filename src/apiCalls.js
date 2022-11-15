@@ -17,3 +17,14 @@ export const postUrl = async (url, title) => {
   const data = await resp.json()
   return data
 }
+
+export const deletePost = async(id) =>{
+  const remove = {
+    method: 'DELETE',
+  }
+
+  const resp = await fetch(`http://localhost:3001/api/v1/urls/${id}`, remove) 
+  const data = await resp.json()
+  return data
+
+}
