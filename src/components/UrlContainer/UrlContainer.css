@@ -4,4 +4,19 @@
   margin: 10px;
   padding: 5px;
   background-color: #FFF;
+  width: 40vw;
+  height: auto;
+  border-radius: 12px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.delete:hover {
+  cursor: pointer;
+  color: red;
 }
