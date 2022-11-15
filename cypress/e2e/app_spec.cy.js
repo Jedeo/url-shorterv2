@@ -36,7 +36,7 @@ describe("empty spec", () => {
       );
   });
 
-  it.only("should be able to fill out and submits the form, and a new shortened URL is rendered", () => {
+  it("should be able to fill out and submits the form, and a new shortened URL is rendered", () => {
     cy.intercept("GET", "http://localhost:3001/api/v1/urls", {
       fixture: "testUrl",
     });
@@ -45,11 +45,23 @@ describe("empty spec", () => {
       .click()
       .type("Test Here")
       .should("have.value", "Test Here");
-    cy.get('[placeholder="URL to Shorten..."]').click().type(
-      "https://images.freeimages.com/images/large-previews/85a/cliff-over-indian-ocean-1520869.jpg"
-    );
-    cy.get('button').click()
+    cy.get('[placeholder="URL to Shorten..."]')
+      .click()
+      .type(
+        "https://images.freeimages.com/images/large-previews/85a/cliff-over-indian-ocean-1520869.jpg"
+      );
+    cy.get("button").click();
     cy.get("h3").should("exist").contains("Test Here");
     cy.get("a").should("exist").contains("http://localhost:3001/useshorturl/1");
+  });
+
+  it.skip("should be able to delete a short link and remove it form screen", () => {
+    cy.intercept("DELETE", "http://localhost:3001/api/v1/urls/1", {
+      fixture: "testUrl2",
+    });
+    cy.get('.card-container > :nth-child(1)').should("be.visible")
+    cy.get(':nth-child(1) > .delete').should("be.visible")
+    cy.get(':nth-child(1) > .delete').click()
+    cy.get('.card-container > :nth-child(1)').should("not.exist")
   });
 });

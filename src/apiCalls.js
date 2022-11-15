@@ -1,3 +1,17 @@
+const getCheckFetch = async(resp) => {
+  try{
+    if(!resp.ok){
+      throw new Error("Oops something went wrong")
+    }
+    const data = await resp.json()
+    return data
+
+  }catch(err){
+    return err
+
+  }
+}
+
 export const getUrls = () => {
   return fetch('http://localhost:3001/api/v1/urls')
       .then(response => response.json())
@@ -14,8 +28,7 @@ export const postUrl = async (url, title) => {
   }
 
   const resp = await fetch('http://localhost:3001/api/v1/urls', add) 
-  const data = await resp.json()
-  return data
+  getCheckFetch(resp)
 }
 
 export const deletePost = async(id) =>{
@@ -24,7 +37,6 @@ export const deletePost = async(id) =>{
   }
 
   const resp = await fetch(`http://localhost:3001/api/v1/urls/${id}`, remove) 
-  const data = await resp.json()
-  return data
+  getCheckFetch(resp)
 
 }

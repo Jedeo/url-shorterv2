@@ -34,7 +34,7 @@ export class App extends Component {
           <UrlForm getNewURl={this.getNewURl} />
         </header>
 
-        <UrlContainer urls={this.state.urls}/>
+        <UrlContainer getNewURl={this.getNewURl}urls={this.state.urls}/>
       </main>
     );
   }
